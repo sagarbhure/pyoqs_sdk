@@ -6,4 +6,4 @@
 # version ='1.0'
 # --------------------------------------------------------------------
 
-from f5oqs_sdk.f5oqs_sdk import *
+from f5oqs_sdk import *
