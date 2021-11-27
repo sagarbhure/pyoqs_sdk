@@ -1,0 +1,86 @@
+#!/usr/bin/env python3 
+# -*- coding: utf-8 -*-
+#---------------------------------------------------------------------
+# Created By  : Sagar BHURE
+# Created Date: 21/11/2021
+# version ='1.0'
+# --------------------------------------------------------------------
+
+
+import f5oqs_sdk
+import platform  # to learn the OS we're on
+import random
+
+# KEMs for which unit testing is disabled
+disabled_KEM_patterns = []
+
+if platform.system() == "Windows":
+    disabled_KEM_patterns = ["Classic-McEliece"]
+
+
+def test_correctness():
+    for alg_name in f5oqs_sdk.get_enabled_KEM_mechanisms():
+        print(alg_name)
+        if any(item in alg_name for item in disabled_KEM_patterns):
+            continue
+        yield check_correctness, alg_name
+
+
+def check_correctness(alg_name):
+    with f5oqs_sdk.KeyEncapsulation(alg_name) as kem:
+        public_key = kem.generate_keypair()
+        ciphertext, shared_secret_server = kem.encap_secret(public_key)
+        shared_secret_client = kem.decap_secret(ciphertext)
+        assert shared_secret_client == shared_secret_server
+
+
+def test_wrong_ciphertext():
+    for alg_name in f5oqs_sdk.get_enabled_KEM_mechanisms():
+        if any(item in alg_name for item in disabled_KEM_patterns):
+            continue
+        yield check_wrong_ciphertext, alg_name
+
+
+def check_wrong_ciphertext(alg_name):
+    with f5oqs_sdk.KeyEncapsulation(alg_name) as kem:
+        public_key = kem.generate_keypair()
+        ciphertext, shared_secret_server = kem.encap_secret(public_key)
+        wrong_ciphertext = bytes(random.getrandbits(8) for _ in range(len(ciphertext)))
+        shared_secret_client = kem.decap_secret(wrong_ciphertext)
+        assert shared_secret_client != shared_secret_server
+
+
+def test_not_supported():
+    try:
+        with f5oqs_sdk.KeyEncapsulation("bogus") as kem:
+            raise AssertionError("f5oqs_sdk.MechanismNotSupportedError was not raised.")
+    except f5oqs_sdk.MechanismNotSupportedError:
+        pass
+    except E:
+        raise AssertionError("An unexpected exception was raised. " + E)
+
+
+def test_not_enabled():
+    # TODO: test broken as the compiled lib determines which algorithms are supported and enabled
+    for alg_name in f5oqs_sdk.get_supported_KEM_mechanisms():
+        if alg_name not in f5oqs_sdk.get_enabled_KEM_mechanisms():
+            # found a non-enabled but supported alg
+            try:
+                with f5oqs_sdk.KeyEncapsulation(alg_name) as kem:
+                    raise AssertionError("f5oqs_sdk.MechanismNotEnabledError was not raised.")
+            except f5oqs_sdk.MechanismNotEnabledError:
+                pass
+            except E:
+                raise AssertionError("An unexpected exception was raised. " + E)
+
+
+if __name__ == '__main__':
+    try:
+        import nose2
+
+        nose2.main()
+
+    except ImportError:
+        import nose
+
+        nose.runmodule()
