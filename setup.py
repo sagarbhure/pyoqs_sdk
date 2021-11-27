@@ -12,7 +12,7 @@ from distutils.core import setup
 
 setup(
     name='f5oqs_sdk',
-    version='0.4.0',
+    version='0.5.0',
     author='Quantum Cryptography and beyond',
     author_email='sagarbhureaerospace@gmail.com',
     packages=find_packages(exclude=('tests', 'docs', 'examples')),
