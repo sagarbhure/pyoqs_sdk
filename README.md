@@ -29,6 +29,13 @@ This Project contains following Contents
 
 ## Installation
 
+This project is on [PyPI](https://pypi.org/project/f5oqs-sdk/) and can be installed with
+
+```
+pip install f5oqs_sdk
+```
+
+
 First, you must build liboqs according to the liboqs building instructions with shared library support enabled (add `-DBUILD_SHARED_LIBS=ON` to the cmake command), followed (optionally) by a sudo ninja install to ensure that the shared library is visible system-wide (by default it installs under `/usr/local/include` and `/usr/local/lib` on Linux/macOS).
 
 On Linux/macOS you may need to set the `LD_LIBRARY_PATH` (`DYLD_LIBRARY_PATH` on macOS) environment variable to point to the path to liboqs' library directory, e.g.
@@ -36,14 +43,7 @@ On Linux/macOS you may need to set the `LD_LIBRARY_PATH` (`DYLD_LIBRARY_PATH` on
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 ```
 
-This project is on [PyPI](https://pypi.org/project/f5oqs-sdk/) and can be installed with
-
-```
-pip install f5oqs_sdk
-```
-
 Alternatively, you can install it from this repository directly:
-
 
 ```
 git clone https://github.com/sagarbhure/f5oqs_sdk
