@@ -22,7 +22,7 @@ Python 3.x f5oqs_sdk depends on the liboqs C library; liboqs must first be compi
 This Project contains following Contents
 
 - `f5oqs_sdk/f5oqs_sdk.py`: a Python 3 module wrapper for the liboqs C library.
-- `f5oqs_sdk/rand.py`:` a Python 3 module supporting RNGs from <oqs/rand.h>
+- `f5oqs_sdk/rand.py`: a Python 3 module supporting RNGs from <oqs/rand.h>
 - `test`: unit test to be added
 
 
