@@ -1,9 +1,9 @@
 
 # Quantum-Proof Security with f5oqs_sdk in Python 
-[![Build status](https://ci.appveyor.com/api/projects/status/jjo1ti9l5e0grgln?svg=true)](https://github.com/sagarbhure/f5oqs_sdk/releases/tag/v2.0)
+
 [![Build status](https://www.python.org/static/community_logos/python-logo.png)](https://pypi.org/project/f5oqs-sdk/)
 
-![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)  ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)  ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)  ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+[![Build status](https://ci.appveyor.com/api/projects/status/jjo1ti9l5e0grgln?svg=true)](https://github.com/sagarbhure/f5oqs_sdk/releases/tag/v2.0) ![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)  ![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)  ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)  ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 f5oqs_sdk PyPi : https://pypi.org/project/f5oqs-sdk/
 
