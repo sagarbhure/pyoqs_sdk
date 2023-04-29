@@ -6,4 +6,4 @@
 # version ='1.0'
 # --------------------------------------------------------------------
 
-from f5oqs_sdk import *
+from pyoqs_sdk import *

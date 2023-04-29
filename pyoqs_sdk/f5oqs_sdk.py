@@ -381,19 +381,19 @@ def randombytes(bytes_to_read):
     :param bytes_to_read: the number of random bytes to generate.
     :return: random bytes.
     """
-    result = f5oqs_sdk.ct.create_string_buffer(bytes_to_read)
-    f5oqs_sdk.native().OQS_randombytes(result, f5oqs_sdk.ct.c_int(bytes_to_read))
+    result = pyoqs_sdk.ct.create_string_buffer(bytes_to_read)
+    pyoqs_sdk.native().OQS_randombytes(result, pyoqs_sdk.ct.c_int(bytes_to_read))
     return bytes(result)
 
 
 def randombytes_switch_algorithm(alg_name):
     """
-    Switches the core OQS_randombytes to use the specified algorithm. See <f5oqs_sdk/rand.h> libf5oqs_sdk headers for more details.
+    Switches the core OQS_randombytes to use the specified algorithm. See <pyoqs_sdk/rand.h> libpyoqs_sdk headers for more details.
 
     :param alg_name: algorithm name, possible values are "system", "NIST-KAT", "OpenSSL".
     """
-    if f5oqs_sdk.native().OQS_randombytes_switch_algorithm(
-            f5oqs_sdk.ct.create_string_buffer(alg_name.encode())) != f5oqs_sdk.OQS_SUCCESS:
+    if pyoqs_sdk.native().OQS_randombytes_switch_algorithm(
+            pyoqs_sdk.ct.create_string_buffer(alg_name.encode())) != pyoqs_sdk.OQS_SUCCESS:
         raise RuntimeError('Can not switch algorithm')
 
 
@@ -410,7 +410,7 @@ def randombytes_nist_kat_init_256bit(entropy_input, personalization_string=None)
     if personalization_string is not None:
         if len(personalization_string) < 48:
             raise ValueError('The personalization string must be either empty or at least 48 bytes long')
-        f5oqs_sdk.native().OQS_randombytes_nist_kat_init_256bit(f5oqs_sdk.ct.create_string_buffer(entropy_input),
-                                                   f5oqs_sdk.ct.create_string_buffer(personalization_string))
+        pyoqs_sdk.native().OQS_randombytes_nist_kat_init_256bit(pyoqs_sdk.ct.create_string_buffer(entropy_input),
+                                                   pyoqs_sdk.ct.create_string_buffer(personalization_string))
 
-    f5oqs_sdk.native().OQS_randombytes_nist_kat_init_256bit(f5oqs_sdk.ct.create_string_buffer(entropy_input), 0)
+    pyoqs_sdk.native().OQS_randombytes_nist_kat_init_256bit(pyoqs_sdk.ct.create_string_buffer(entropy_input), 0)

@@ -23,7 +23,7 @@ RUN apk add build-base linux-headers cmake ninja git
 # get all sources
 WORKDIR /opt
 RUN git clone --depth 1 --branch main https://github.com/open-quantum-safe/liboqs && \
-    git clone --depth 1 --branch main https://github.com/open-quantum-safe/f5oqs-sdk.git 
+    git clone --depth 1 --branch main https://github.com/open-quantum-safe/pyoqs-sdk.git 
 
 # build liboqs 
 WORKDIR /opt/liboqs
@@ -45,12 +45,12 @@ RUN apk update && apk upgrade && apk add python3
 
 # Only retain the binary contents in the final image
 COPY --from=intermediate /usr/local /usr/local
-COPY --from=intermediate /opt/f5oqs-sdk /opt/f5oqs-sdk
+COPY --from=intermediate /opt/pyoqs-sdk /opt/pyoqs-sdk
 
-ENV PYTHONPATH=/opt/f5oqs-sdk
+ENV PYTHONPATH=/opt/pyoqs-sdk
 
-# Install f5oqs-sdk
-RUN cd /opt/f5oqs-sdk && python3 setup.py install
+# Install pyoqs-sdk
+RUN cd /opt/pyoqs-sdk && python3 setup.py install
 
 # Enable a normal user 
 RUN addgroup -g 1000 -S oqs && adduser --uid 1000 -S oqs -G oqs 
