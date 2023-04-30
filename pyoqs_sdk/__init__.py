@@ -6,4 +6,4 @@
 # version ='1.0'
 # --------------------------------------------------------------------
 
-from pyoqs_sdk import *
+from pyoqs_sdk.pyoqs_sdk import *
