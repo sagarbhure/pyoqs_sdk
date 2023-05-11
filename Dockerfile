@@ -23,9 +23,9 @@ RUN apk add build-base linux-headers cmake ninja git
 # get all sources
 WORKDIR /opt
 RUN git clone --depth 1 --branch main https://github.com/open-quantum-safe/liboqs && \
-    git clone --depth 1 --branch main https://github.com/open-quantum-safe/pyoqs-sdk.git 
+    git clone --depth 1 --branch main https://github.com/open-quantum-safe/pyoqs-sdk.git
 
-# build liboqs 
+# build liboqs
 WORKDIR /opt/liboqs
 RUN mkdir build && cd build && cmake -GNinja .. ${LIBOQS_BUILD_DEFINES} && ninja install
 
@@ -52,8 +52,8 @@ ENV PYTHONPATH=/opt/pyoqs-sdk
 # Install pyoqs-sdk
 RUN cd /opt/pyoqs-sdk && python3 setup.py install
 
-# Enable a normal user 
-RUN addgroup -g 1000 -S oqs && adduser --uid 1000 -S oqs -G oqs 
+# Enable a normal user
+RUN addgroup -g 1000 -S oqs && adduser --uid 1000 -S oqs -G oqs
 
 USER oqs
 WORKDIR /home/oqs
